@@ -1,34 +1,50 @@
-//let promessa = axios.get('https://mock-api.driven.com.br/api/v6/uol/participants ');
-let user = {name: "",};
+let part, sombra, contatos, nominho;
+let mensagem = {name:"",to:"Todos", text:"", type:"message"};
 const areamsg = document.querySelector('.areademensagens');
 const promessa = axios.get('https://mock-api.driven.com.br/api/v6/uol/messages');
 
 
+let texto = document.querySelector('.cxtexto');//.value; // texto da input
+sombra = document.querySelector(".cobertura");
+part = document.querySelector(".participantes");
+contatos = document.querySelector(".contatos");
 
 promessa.then(exibirMensagens);
 promessa.catch(falha);
+const promessaparticipantes = axios.get('https://mock-api.driven.com.br/api/v6/uol/participants');
+promessaparticipantes.then(exibirParticipantes);
 
-//user.name = prompt("Qual seu nome de usuário?");
-//const requisicao = axios.post('https://mock-api.driven.com.br/api/v6/uol/participants', {name: user.name});
-//requisicao.then(sucesso);
-//requisicao.catch(falha);
 
+
+qualseunome();
+
+ function qualseunome() {
+    mensagem.name = prompt("Qual seu nome de usuário?");
+    const requisicao = axios.post('https://mock-api.driven.com.br/api/v6/uol/participants', mensagem.name);
+    requisicao.then(sucesso);
+    requisicao.catch(falhaUsuario);
+}
+function sucesso() {
+    alert("bem vindo ao xét");
+
+}
+function falhaUsuario(error) {
+      console.log(error);
+      alert(`O erro ${error} nome de usuário inválido.`);
+      //setInterval(qualseunome(), 1000);
+  }
 
 function falha(error) {
-    console.log(user.name);
     console.log(error);
-    //alert(`O erro ${error} ocorreu tente outro nome de usuário.`);
-    //escolherNome();
+    alert(`O erro ${error} tente novamente mais tarde.`);
+    
 }
 
-//<div class="mensagens"><span class="hora">${hora da msg}</span><span class="usermsg">${usuario que enviou}</span><span class="msg">${texto da msg}</span></div>
-// areamsg.innerHTML = axios.get('https://mock-api.driven.com.br/api/v6/uol/participants', );
 
 function exibirMensagens(resposta) {
     areamsg.innerHTML = "";
     console.log(promessa);
     console.log(promessa.data);
-    
     
       
     for (let i = 0; i < 100; i++) {
@@ -45,3 +61,39 @@ function exibirMensagens(resposta) {
     areamsg.scrollIntoView(false);
 }
 
+
+function enviarMensagem() {
+    //mensagem.time = `${getHours()}:${getMinutes()}`
+    mensagem.text = texto.value;
+    axios.post("https://mock-api.driven.com.br/api/v6/uol/messages", mensagem);
+
+}
+
+function mensagemTodos() {
+    mensagem.to = "Todos";
+    mensagem.type = "message";
+}
+function mensagemPrivada(userpm) {
+    mensagem.to = `${userpm}`;
+    mensagem.type = "message";
+}
+
+function  buscarParticipantes() {
+    promessaparticipantes.then(exibirParticipantes);
+    toggleLista();
+    
+}
+
+function exibirParticipantes(participantes) {
+    contatos.innerHTML =  "";
+    console.log(participantes.data);
+    for (let a = 0; a < participantes.data.length ; a++){
+       contatos.innerHTML += `<div class="contato" onclick="mensagemPrivada(${participantes.data[a].name})"><ion-icon name="person-circle" style="font-size: 20px; margin-right: 8px;"></ion-icon><p>${participantes.data[a].name}</p><ion-icon name="checkmark-sharp" class="check"></ion-icon></div>`;
+    }
+    
+}
+function toggleLista() {
+    sombra.classList.toggle('display');
+    part.classList.toggle('display');
+}
+//$(texto).keypress(enviarMensagem());
