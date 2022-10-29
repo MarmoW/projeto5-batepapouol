@@ -2,6 +2,7 @@ let part, sombra, contatos, nominho;
 let mensagem = {name:"",to:"Todos", text:"", type:"message"};
 const areamsg = document.querySelector('.areademensagens');
 const promessa = axios.get('https://mock-api.driven.com.br/api/v6/uol/messages');
+let usuario = {name: "",}
 
 
 let texto = document.querySelector('.cxtexto');//.value; // texto da input
@@ -19,13 +20,15 @@ promessaparticipantes.then(exibirParticipantes);
 qualseunome();
 
  function qualseunome() {
-    mensagem.name = prompt("Qual seu nome de usuário?");
-    const requisicao = axios.post('https://mock-api.driven.com.br/api/v6/uol/participants', mensagem.name);
+    usuario.name = prompt("Qual seu nome de usuário?");
+    const requisicao = axios.post('https://mock-api.driven.com.br/api/v6/uol/participants', usuario);
     requisicao.then(sucesso);
     requisicao.catch(falhaUsuario);
 }
+
 function sucesso() {
     alert("bem vindo ao xét");
+    setInterval(manterConexao, 4000);
 
 }
 function falhaUsuario(error) {
@@ -85,7 +88,7 @@ function  buscarParticipantes() {
 }
 
 function exibirParticipantes(participantes) {
-    contatos.innerHTML =  "";
+    contatos.innerHTML =  `<div class="contato"><ion-icon name="people" style="font-size: 20px; margin-right: 8px;"></ion-icon><p>Todos</p><ion-icon name="checkmark-sharp" class="check"></ion-icon></div>`;
     console.log(participantes.data);
     for (let a = 0; a < participantes.data.length ; a++){
        contatos.innerHTML += `<div class="contato" onclick="mensagemPrivada(${participantes.data[a].name})"><ion-icon name="person-circle" style="font-size: 20px; margin-right: 8px;"></ion-icon><p>${participantes.data[a].name}</p><ion-icon name="checkmark-sharp" class="check"></ion-icon></div>`;
@@ -96,4 +99,7 @@ function toggleLista() {
     sombra.classList.toggle('display');
     part.classList.toggle('display');
 }
-//$(texto).keypress(enviarMensagem());
+/*function manterConexao{
+   const conection = axios.push("https://mock-api.driven.com.br/api/v6/uol/status", user.name);
+}
+*/
