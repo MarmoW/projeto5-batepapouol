@@ -1,5 +1,7 @@
 body {
     background-color: #E5E5E5;
+    max-height: 100%;
+    max-width: 100%;
 }
 .header {
     width: 100%;
@@ -8,7 +10,7 @@ body {
     position: fixed;
     top: 0px;
     left: 0px;
-    background-color: white;
+    background-color: green    ;
     align-items: center;
     justify-content: space-between;
     box-sizing: border-box;
@@ -36,4 +38,68 @@ body {
     height: 30px;
     font-size: 18px;
     border: none;
+}
+.areademensagens {
+    display: flex;
+    flex-direction: column;
+    padding-top: 106px;
+    padding-bottom: 90px;
+    box-sizing: border-box;
+}
+.mensagens {
+    background-color: #ffffff;
+    display: flex;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    width: 100%;
+    height: auto;
+    margin-bottom: 4px;
+    align-items: center;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 13px;  
+    padding-bottom: 13px;
+    box-sizing: border-box;
+    justify-content: start;
+    overflow-wrap: break-word;
+    
+}
+.msg{    
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    color: #000000;
+    box-sizing: border-box;
+    
+}
+.msg1{    
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    color: #000000;
+    box-sizing: border-box;
+    
+}
+.usermsg{    
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    font-size: 14px;
+    color: #000000;
+    box-sizing: border-box;
+    margin-right: 7px;
+    
+}
+.cinza {
+    background-color: #DCDCDC;
+}
+.rosa {
+    background-color: #FFDEDE;
+}
+
+.hora{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    color: #aaaaaa;
+    width: auto;
 }
