@@ -69,7 +69,7 @@ function atualizarChat() {
 }
 function exibirMensagens(resposta) {
     areamsg.innerHTML = "";
-    console.log(promessa);    
+    console.log("atualizou chat");    
       
     for (let i = 0; i < 100; i++) {
         if (resposta.data[i].type === "message" && resposta.data[i].to === "Todos"){
@@ -96,7 +96,7 @@ function enviarMensagem() {
     const enviomsg = axios.post("https://mock-api.driven.com.br/api/v6/uol/messages", mensagem);
     texto.value = "";
     enviomsg.then(atualizarChat);
-    enviomsg.catch(reloagpag);
+    enviomsg.catch(reloadpag);
 
 }
 
@@ -121,7 +121,7 @@ function exibirParticipantes(participante) {
 }
 function atualizarParticipantes() {
     const promessaparticipantes = axios.get('https://mock-api.driven.com.br/api/v6/uol/participants');
-    console.log("ATUALIZOU");
+    console.log("atualizou participantes");
     promessaparticipantes.then(exibirParticipantes);
     
     
@@ -141,9 +141,16 @@ function marcarCheck(pramarcar) {
     checkon = pramarcar.querySelector(".check");
     checkon.classList.add("displayon");
 }
-function reloagpag() {
-    alert("Você foi desconectado, entre novamente");
+function reloadpag(erro2) {
+    
+    console.log(erro2);
+    if (erro2.message === 'Request failed with status code 400'){
+        alert("Não é possível enviar mensagem vazia.");
+    }
+    else {
     window.location.reload();
+    alert("Você foi desconectado, entre novamente");
+}
 }
 
 texto.addEventListener("keydown", function (e) {
