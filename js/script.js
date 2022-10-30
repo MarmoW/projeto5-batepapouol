@@ -1,4 +1,4 @@
-let part, sombra, contatos, nominho, listpartatt, userpm, checkon, checkoff;
+let part, sombra, contatos, nominho, listpartatt, userpm, checkon, checkoff, telalogin, errologin, campologin;
 let mensagem = {from:"",to:"Todos", text:"", type:"message"};
 const areamsg = document.querySelector('.areademensagens');
 let usuario = {name: "",}
@@ -8,6 +8,9 @@ let texto = document.querySelector('.cxtexto');// texto da input
 sombra = document.querySelector(".cobertura"); //sombreado da tela de participantes
 part = document.querySelector(".participantes");//area da lista de participantess
 contatos = document.querySelector(".contatos");//participantes
+telalogin = document.querySelector(".telainicial");
+errologin = document.querySelector(".erronologin");
+campologin = document.querySelector(".login");
 
 
 const promessaparticipantes = axios.get('https://mock-api.driven.com.br/api/v6/uol/participants');
@@ -18,11 +21,11 @@ promessa.then(exibirMensagens);//recebeu lista de mensagens
 promessa.catch(falha);//falhou receber lista de mensagens
 
 atualizarParticipantes(); //atualiza lista de participantes
-qualseunome();            
+           
 const refreshChat = setInterval(atualizarChat, 3000);
 const refreshPart = setInterval(atualizarParticipantes, 10000);
 
-
+/*
  function qualseunome() {
     usuario.name = prompt("Qual seu nome de usuário?");
     const requisicao = axios.post('https://mock-api.driven.com.br/api/v6/uol/participants', usuario);
@@ -30,16 +33,27 @@ const refreshPart = setInterval(atualizarParticipantes, 10000);
     requisicao.then(sucesso);
     requisicao.catch(falhaUsuario);
 }
+*/
+function fazerlogin() {
+    usuario.name = campologin.value;
+    const requisicao = axios.post('https://mock-api.driven.com.br/api/v6/uol/participants', usuario);
+    mensagem.from = usuario.name;
+    requisicao.then(sucesso);
+    requisicao.catch(falhaUsuario);
 
+}
 function sucesso() {
     //alert("bem vindo ao xét");
     const manterConec = setInterval(manterConexao, 4000);
+    telalogin.classList.add("display");
+
 
 }
 function falhaUsuario(error) {
       console.log(error);
-      alert(`O erro ${error} nome de usuário inválido.`);
-      qualseunome();
+      campologin.innerHTML = "";
+      errologin.innerHTML = "Nome de usuário inválido, tente outro.";
+
   }
 
 function falha(error) {
@@ -82,7 +96,7 @@ function enviarMensagem() {
     const enviomsg = axios.post("https://mock-api.driven.com.br/api/v6/uol/messages", mensagem);
     texto.value = "";
     enviomsg.then(atualizarChat);
-
+    enviomsg.catch(reloagpag);
 
 }
 
@@ -127,7 +141,10 @@ function marcarCheck(pramarcar) {
     checkon = pramarcar.querySelector(".check");
     checkon.classList.add("displayon");
 }
-
+function reloagpag() {
+    alert("Você foi desconectado, entre novamente");
+    window.location.reload();
+}
 
 texto.addEventListener("keydown", function (e) {
     if (e.code === "Enter") {  //checa se a tecla foi enter
@@ -135,3 +152,8 @@ texto.addEventListener("keydown", function (e) {
     }
 });
 
+campologin.addEventListener("keydown", function (e) {
+    if (e.code === "Enter") {  //checa se a tecla foi enter
+        fazerlogin();
+    }
+});
