@@ -67,6 +67,7 @@ function atualizarChat() {
     promessa.catch(falha);
 
 }
+
 function exibirMensagens(resposta) {
     areamsg.innerHTML = "";
     console.log("atualizou chat");    
@@ -97,6 +98,7 @@ function enviarMensagem() {
     texto.value = "";
     enviomsg.then(atualizarChat);
     enviomsg.catch(reloadpag);
+    
 
 }
 
@@ -144,15 +146,15 @@ function marcarCheck(pramarcar) {
 function reloadpag(erro2) {
     
     console.log(erro2);
-    if (mensagem.text === ""){
+    /*if (mensagem.text === ""){
         alert("Não é possível enviar mensagem vazia.");
         
     }
-    else {
+    else {*/
     window.location.reload();
-    alert("Você foi desconectado, entre novamente");
+    alert("Não é possível enviar mensagem vazia ou você foi desconectado");
 }
-}
+
 
 texto.addEventListener("keydown", function (e) {
     if (e.code === "Enter") {  //checa se a tecla foi enter
