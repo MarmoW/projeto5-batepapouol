@@ -144,8 +144,9 @@ function marcarCheck(pramarcar) {
 function reloadpag(erro2) {
     
     console.log(erro2);
-    if (erro2.message === 'Request failed with status code 400'){
+    if (mensagem.text === ""){
         alert("Não é possível enviar mensagem vazia.");
+        
     }
     else {
     window.location.reload();
