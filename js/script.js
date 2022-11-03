@@ -74,16 +74,16 @@ function exibirMensagens(resposta) {
       
     for (let i = 0; i < 100; i++) {
         if (resposta.data[i].type === "message" && resposta.data[i].to === "Todos"){
-        areamsg.innerHTML += `<div class="mensagens"><p class="formatacaomensagem"><span class="hora">(${resposta.data[i].time})</span> <span class="usermsg">${resposta.data[i].from}</span> <span class="msg">para</span> <span class="usermsg">${resposta.data[i].to}</span> <span class="msg">${resposta.data[i].text}</span></p></div>`;
+        areamsg.innerHTML += `<div class="mensagens" data-test="message"><p class="formatacaomensagem"><span class="hora">(${resposta.data[i].time})</span> <span class="usermsg">${resposta.data[i].from}</span> <span class="msg">para</span> <span class="usermsg">${resposta.data[i].to}</span> <span class="msg">${resposta.data[i].text}</span></p></div>`;
         }
         else if (resposta.data[i].type === "status") {
-        areamsg.innerHTML +=  `<div class="mensagens cinza"><p class="formatacaomensagem"><p><span class="hora">(${resposta.data[i].time})</span> <span class="usermsg">${resposta.data[i].from}</span> <span class="msg">${resposta.data[i].text}</span></p></p></div>`;
+        areamsg.innerHTML +=  `<div class="mensagens cinza" data-test="message"><p class="formatacaomensagem"><p><span class="hora">(${resposta.data[i].time})</span> <span class="usermsg">${resposta.data[i].from}</span> <span class="msg">${resposta.data[i].text}</span></p></p></div>`;
         }
         else {
             if (resposta.data[i].to === usuario.name){
-            areamsg.innerHTML +=  `<div class="mensagens rosa"><p class="formatacaomensagem"><span class="hora">(${resposta.data[i].time})</span> <span class="usermsg">${resposta.data[i].from}</span> <span class="msg1">reservadamente para</span> <span class="usermsg">${resposta.data[i].to}</span> <span class="msg">${resposta.data[i].text}</span></p></div>`;
+            areamsg.innerHTML +=  `<div class="mensagens rosa" data-test="message"><p class="formatacaomensagem"><span class="hora">(${resposta.data[i].time})</span> <span class="usermsg">${resposta.data[i].from}</span> <span class="msg1">reservadamente para</span> <span class="usermsg">${resposta.data[i].to}</span> <span class="msg">${resposta.data[i].text}</span></p></div>`;
         }   else if(resposta.data[i].from === usuario.name){
-            areamsg.innerHTML +=  `<div class="mensagens rosa"><p class="formatacaomensagem"><span class="hora">(${resposta.data[i].time})</span> <span class="usermsg">${resposta.data[i].from}</span> <span class="msg1">reservadamente para</span> <span class="usermsg">${resposta.data[i].to}</span> <span class="msg">${resposta.data[i].text}</span></p></div>`;
+            areamsg.innerHTML +=  `<div class="mensagens rosa" data-test="message"><p class="formatacaomensagem"><span class="hora">(${resposta.data[i].time})</span> <span class="usermsg">${resposta.data[i].from}</span> <span class="msg1">reservadamente para</span> <span class="usermsg">${resposta.data[i].to}</span> <span class="msg">${resposta.data[i].text}</span></p></div>`;
         }
         }
     }

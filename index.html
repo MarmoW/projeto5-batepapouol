@@ -14,8 +14,8 @@
 <body>
     <div class="telainicial">
         <img src="img/logo.png" height="130px" width="175px">
-        <input class="login" placeholder="Digite seu nome" type="text">
-        <div class="botaoentrar" onclick="fazerlogin()"> Entrar</div>
+        <input class="login" placeholder="Digite seu nome" type="text" data-identifier="enter-name">
+        <div class="botaoentrar" onclick="fazerlogin()" data-identifier="start"> Entrar</div>
         <div class="erronologin"></div>
 
     </div>
@@ -26,8 +26,8 @@
     <div class="areademensagens">
     </div>
     <footer class="footer">
-        <input placeholder="Escreva aqui..." type="text" class="cxtexto">
-        <ion-icon name="paper-plane-outline" style="font-size: 26px;" onclick="enviarMensagem()"></ion-icon>
+        <input placeholder="Escreva aqui..." type="text" class="cxtexto" data-test="input-message">
+        <ion-icon name="paper-plane-outline" style="font-size: 26px;" onclick="enviarMensagem()" data-test="send-message"></ion-icon>
     </footer>   
     <div class="cobertura display" onclick="toggleLista()"></div>
     <div class="participantes display">
